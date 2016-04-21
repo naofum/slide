@@ -19,7 +19,7 @@ android {
     defaultConfig {
         versionCode 2
         versionName "1.1"
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 21
     }
 
@@ -35,6 +35,10 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'com/itextpdf/text/pdf/fonts/cmap_info.txt'
+    }
+
     lintOptions {
         abortOnError false
         checkReleaseBuilds false
@@ -48,11 +52,14 @@ repositories {
 }
 
 dependencies {
-    compile 'co.trikita:anvil-sdk19:0.3.1'
+    compile 'co.trikita:anvil-sdk15:0.3.2'
     compile 'com.github.trikita:jedux:-SNAPSHOT'
     compile 'com.github.trikita:promote:-SNAPSHOT'
 
     compile 'org.immutables:gson:2.1.14'
     apt 'org.immutables:value:2.1.14'
     provided 'org.immutables:value:2.1.14'
+
+    compile 'com.itextpdf:itextg:5.5.9'
+    compile 'com.itextpdf:itext-asian:5.2.0'
 }
