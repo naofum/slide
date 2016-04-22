@@ -36,7 +36,7 @@ android {
     }
 
     packagingOptions {
-        exclude 'com/itextpdf/text/pdf/fonts/cmap_info.txt'
+        pickFirst 'com/itextpdf/text/pdf/fonts/cmap_info.txt'
     }
 
     lintOptions {
@@ -60,6 +60,6 @@ dependencies {
     apt 'org.immutables:value:2.1.14'
     provided 'org.immutables:value:2.1.14'
 
-    compile 'com.itextpdf:itextg:5.5.9'
     compile 'com.itextpdf:itext-asian:5.2.0'
+    compile 'com.itextpdf:itextg:5.5.9'
 }
