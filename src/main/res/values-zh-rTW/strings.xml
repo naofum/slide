@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Slide</string>
+
+    <string name="tutorial_text">SLIDE\n\n每款是幻燈片\n\n這是一個空行的\n.\n幻燈片\n\n輕按預覽\n開始演示。\n你也可能選擇\n一種顏色格式在哪裡。\n\n完成了!\n\n不要忘了\n導出為PDF和共享。</string>
+</resources>

@@ -26,6 +26,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 
 import trikita.jedux.Action;
 import trikita.jedux.Store;
@@ -109,9 +110,20 @@ public class Exporter implements Store.Middleware<Action<ActionType, ?>, State> 
                 if (size > ((640 - 72) / cols)) {
                     size = ((640 - 72) / cols);
                 }
-//                size = (int)(size / 1.1);
                 for (int j = 0; j < lines.length; j++) {
-                    BaseFont baseFont = BaseFont.createFont("HeiseiMin-W3", "UniJIS-UCS2-HW-H", BaseFont.NOT_EMBEDDED);
+                    BaseFont baseFont;
+                    if (Locale.getDefault().getLanguage().equals(Locale.JAPANESE.getLanguage())) {
+                        baseFont = BaseFont.createFont("HeiseiMin-W3", "UniJIS-UCS2-HW-H", BaseFont.NOT_EMBEDDED);
+                    } else if (Locale.getDefault().getLanguage().equals(Locale.SIMPLIFIED_CHINESE.getLanguage())) {
+                        baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+                        if (j == 0) size = (int)(size / 1.1);
+                    } else if (Locale.getDefault().getLanguage().equals(Locale.TRADITIONAL_CHINESE.getLanguage())) {
+                        baseFont = BaseFont.createFont("MSung-Light", "UniCNS-UCS2-H", BaseFont.NOT_EMBEDDED);
+                        if (j == 0) size = (int)(size / 1.1);
+                    } else {
+                        baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                        if (j == 0) size = (int)(size * 1.2);
+                    }
                     Font font = new Font(baseFont, size, Font.NORMAL, new BaseColor(Style.COLOR_SCHEMES[store.getState().colorScheme()][0]));
                     if (lines[j].isEmpty()) {
                         document.add(Chunk.NEWLINE);
